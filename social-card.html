@@ -1,0 +1,306 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=1200">
+<link href="https://fonts.googleapis.com/css2?family=Oswald:wght@300;400;500;600&family=DM+Sans:wght@300;400;500&family=Lora:ital@1&display=swap" rel="stylesheet">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html, body {
+    width: 1200px;
+    height: 630px;
+    overflow: hidden;
+    background: #0a0a09;
+  }
+
+  .card {
+    width: 1200px;
+    height: 630px;
+    background: #0a0a09;
+    position: relative;
+    overflow: hidden;
+    display: flex;
+  }
+
+  /* ── CONTENT COLUMN ── */
+  .content {
+    position: relative;
+    z-index: 4;
+    width: 680px;
+    flex-shrink: 0;
+    padding: 58px 72px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
+
+  /* Top brand line */
+  .brand-row {
+    display: flex;
+    align-items: center;
+    gap: 0;
+  }
+  .brand-wordmark {
+    font-family: 'Oswald', sans-serif;
+    font-weight: 600;
+    font-size: 15px;
+    letter-spacing: 0.22em;
+    color: #f4f1eb;
+    white-space: nowrap;
+  }
+  .brand-sub {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 10px;
+    letter-spacing: 0.38em;
+    text-transform: uppercase;
+    color: #4e4e48;
+    margin-left: 18px;
+    white-space: nowrap;
+  }
+  .brand-rule {
+    flex: 1;
+    height: 1px;
+    background: linear-gradient(to right, #2a2820 0%, transparent 100%);
+    margin-left: 20px;
+  }
+
+  /* Main headline */
+  .headline {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 0;
+    margin-top: -12px;
+  }
+  .eyebrow {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 10px;
+    letter-spacing: 0.42em;
+    text-transform: uppercase;
+    color: #9fb890;
+    margin-bottom: 22px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+  .eyebrow::before {
+    content: '';
+    display: block;
+    width: 28px;
+    height: 1px;
+    background: #9fb890;
+    flex-shrink: 0;
+  }
+  .h1 {
+    font-family: 'Oswald', sans-serif;
+    font-weight: 600;
+    font-size: 108px;
+    line-height: 0.87;
+    letter-spacing: 0.015em;
+    color: #f4f1eb;
+  }
+  .h1 .stone {
+    color: #c8b99a;
+    display: block;
+  }
+  .tagline {
+    font-family: 'Lora', serif;
+    font-style: italic;
+    font-size: 14px;
+    color: rgba(244,241,235,0.45);
+    margin-top: 22px;
+    letter-spacing: 0.02em;
+  }
+
+  /* Bottom bar */
+  .bottom-bar {
+    border-top: 1px solid #1f1e1b;
+    padding-top: 22px;
+    display: flex;
+    align-items: flex-end;
+    gap: 32px;
+  }
+  .price-block { line-height: 1; }
+  .price-label {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 9px;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: #4e4e48;
+    margin-bottom: 6px;
+  }
+  .price-amount {
+    font-family: 'Oswald', sans-serif;
+    font-weight: 500;
+    font-size: 40px;
+    color: #f4f1eb;
+    letter-spacing: 0.02em;
+  }
+  .divider {
+    width: 1px;
+    height: 44px;
+    background: #1f1e1b;
+    flex-shrink: 0;
+  }
+  .spec-list {
+    display: flex;
+    flex-direction: column;
+    gap: 7px;
+  }
+  .spec-item {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 10px;
+    letter-spacing: 0.24em;
+    text-transform: uppercase;
+    color: #6e6e66;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  .spec-item::before {
+    content: '';
+    display: block;
+    width: 14px;
+    height: 1px;
+    background: #9fb890;
+    flex-shrink: 0;
+  }
+
+  .veteran-tag {
+    margin-left: auto;
+    display: flex;
+    align-items: center;
+    gap: 7px;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 9px;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: #4e4e48;
+    padding-bottom: 2px;
+  }
+  .veteran-tag svg { color: #c8b99a; }
+
+  /* ── SVG VISUAL SIDE ── */
+  .visual {
+    position: absolute;
+    right: 0;
+    top: 0;
+    width: 680px;
+    height: 630px;
+    z-index: 2;
+  }
+
+  /* Left-edge fade so content bleeds cleanly */
+  .content-fade {
+    position: absolute;
+    left: 560px;
+    top: 0;
+    width: 220px;
+    height: 100%;
+    background: linear-gradient(to right, #0a0a09 0%, transparent 100%);
+    z-index: 3;
+    pointer-events: none;
+  }
+
+  /* Subtle noise grain */
+  .grain {
+    position: absolute;
+    inset: 0;
+    z-index: 5;
+    pointer-events: none;
+    opacity: 0.035;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+    background-size: 200px 200px;
+  }
+</style>
+</head>
+<body>
+<div class="card">
+
+  <!-- Infrared arcs — centre point bleeds off right edge -->
+  <svg class="visual" viewBox="0 0 680 630" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <defs>
+      <radialGradient id="arcGlow" cx="100%" cy="50%" r="75%" gradientUnits="objectBoundingBox">
+        <stop offset="0%"  stop-color="#c8b99a" stop-opacity="0.28"/>
+        <stop offset="35%" stop-color="#9fb890" stop-opacity="0.14"/>
+        <stop offset="100%" stop-color="#0a0a09" stop-opacity="0"/>
+      </radialGradient>
+    </defs>
+
+    <!-- Background glow wash -->
+    <ellipse cx="680" cy="315" rx="500" ry="500" fill="url(#arcGlow)"/>
+
+    <!-- Concentric rings — cx at right edge, radiating left — warm stone/sage tones -->
+    <circle cx="680" cy="315" r="90"  stroke="#c8b99a" stroke-width="0.8" opacity="0.70"/>
+    <circle cx="680" cy="315" r="150" stroke="#c8b99a" stroke-width="0.7" opacity="0.58"/>
+    <circle cx="680" cy="315" r="215" stroke="#beab8e" stroke-width="0.6" opacity="0.48"/>
+    <circle cx="680" cy="315" r="280" stroke="#9fb890" stroke-width="0.6" opacity="0.38"/>
+    <circle cx="680" cy="315" r="348" stroke="#9fb890" stroke-width="0.5" opacity="0.28"/>
+    <circle cx="680" cy="315" r="418" stroke="#9fb890" stroke-width="0.5" opacity="0.20"/>
+    <circle cx="680" cy="315" r="490" stroke="#9fb890" stroke-width="0.4" opacity="0.14"/>
+    <circle cx="680" cy="315" r="565" stroke="#b4c4a4" stroke-width="0.3" opacity="0.09"/>
+    <circle cx="680" cy="315" r="640" stroke="#9fb890" stroke-width="0.3" opacity="0.06"/>
+
+    <!-- Fine radial spokes (very subtle) -->
+    <line x1="680" y1="315" x2="150" y2="50"  stroke="#2a2820" stroke-width="0.4" opacity="0.6"/>
+    <line x1="680" y1="315" x2="110" y2="180" stroke="#2a2820" stroke-width="0.4" opacity="0.5"/>
+    <line x1="680" y1="315" x2="100" y2="315" stroke="#2a2820" stroke-width="0.4" opacity="0.4"/>
+    <line x1="680" y1="315" x2="110" y2="450" stroke="#2a2820" stroke-width="0.4" opacity="0.5"/>
+    <line x1="680" y1="315" x2="150" y2="580" stroke="#2a2820" stroke-width="0.4" opacity="0.6"/>
+
+    <!-- Centre source dot -->
+    <circle cx="680" cy="315" r="5"  fill="#c8b99a" opacity="0.5"/>
+    <circle cx="680" cy="315" r="2.5" fill="#f4f1eb" opacity="0.8"/>
+  </svg>
+
+  <!-- Fade seam between arcs and content -->
+  <div class="content-fade"></div>
+
+  <!-- Content -->
+  <div class="content">
+
+    <div class="brand-row">
+      <span class="brand-wordmark">BOKETTO</span>
+      <span class="brand-sub">Float &amp; Wellness</span>
+      <div class="brand-rule"></div>
+    </div>
+
+    <div class="headline">
+      <div class="eyebrow">Full Spectrum Infrared · Gold Coast</div>
+      <div class="h1">
+        INFRA<span class="stone">RED</span>
+        SAUNA
+      </div>
+      <div class="tagline">Hemlock timber. 5-year warranty. Delivered &amp; installed.</div>
+    </div>
+
+    <div class="bottom-bar">
+      <div class="price-block">
+        <div class="price-label">From</div>
+        <div class="price-amount">$2,900</div>
+      </div>
+      <div class="divider"></div>
+      <div class="spec-list">
+        <div class="spec-item">Free Delivery &amp; Setup</div>
+        <div class="spec-item">Gold Coast, QLD</div>
+        <div class="spec-item">Afterpay Available</div>
+      </div>
+      <div class="veteran-tag">
+        <svg width="12" height="12" viewBox="0 0 13 13" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M6.5 1l1.3 2.6 2.9.4-2.1 2 .5 2.9L6.5 7.5 3.9 8.9l.5-2.9-2.1-2 2.9-.4z"/>
+          <path d="M4 9.5l-1.5 3M9 9.5l1.5 3"/>
+        </svg>
+        Veteran Owned
+      </div>
+    </div>
+
+  </div>
+
+  <!-- Grain overlay -->
+  <div class="grain"></div>
+
+</div>
+</body>
+</html>
