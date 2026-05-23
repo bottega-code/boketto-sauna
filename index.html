@@ -169,26 +169,6 @@
     text-shadow: 0 1px 8px rgba(0,0,0,0.6);
   }
 
-  /* Change-photo button */
-  .change-photo-btn {
-    position: absolute; top: 1rem; left: 1rem; z-index: 10;
-    background: rgba(10,10,9,0.65);
-    border: 1px solid rgba(244,241,235,0.15);
-    color: var(--text-muted);
-    font-family: 'DM Sans', sans-serif;
-    font-size: 0.58rem; letter-spacing: 0.18em;
-    text-transform: uppercase;
-    padding: 0.38rem 0.75rem;
-    cursor: pointer;
-    transition: border-color 0.25s, color 0.25s;
-    backdrop-filter: blur(8px);
-  }
-
-  .change-photo-btn:hover {
-    border-color: var(--accent-border);
-    color: var(--accent);
-  }
-
   /* ── HERO CONTENT ── */
   .hero-content {
     display: flex; flex-direction: column; justify-content: center;
@@ -639,10 +619,6 @@
     transition: border-color 0.3s cubic-bezier(0.16,1,0.3,1),
                 color 0.3s cubic-bezier(0.16,1,0.3,1);
   }
-  .change-photo-btn {
-    transition: border-color 0.3s cubic-bezier(0.16,1,0.3,1),
-                color 0.3s cubic-bezier(0.16,1,0.3,1);
-  }
   .btn-primary {
     transition: background 0.3s cubic-bezier(0.16,1,0.3,1),
                 transform 0.25s cubic-bezier(0.16,1,0.3,1);
@@ -778,9 +754,6 @@
       <p class="overlay-quote">"The warmth that resets you — body, mind, and breath."</p>
     </div>
 
-    <!-- Discreet change photo button -->
-    <button class="change-photo-btn" id="changePhotoBtn">Change Photo</button>
-    <input type="file" id="heroInput" accept="image/*" style="display:none;">
   </div>
 
   <!-- Content side -->
@@ -984,19 +957,7 @@
 </footer>
 
 <script>
-  const input = document.getElementById('heroInput');
-  const btn   = document.getElementById('changePhotoBtn');
-  const img   = document.getElementById('heroImg');
-
-  btn.addEventListener('click', () => input.click());
-
-  input.addEventListener('change', (e) => {
-    const file = e.target.files[0];
-    if (!file || !file.type.startsWith('image/')) return;
-    const reader = new FileReader();
-    reader.onload = (ev) => { img.src = ev.target.result; };
-    reader.readAsDataURL(file);
-  });
+  const img = document.getElementById('heroImg');
 
   // Parallax — moves image at 40% of scroll speed, creating depth
   const heroSide = document.getElementById('heroImageSide');
